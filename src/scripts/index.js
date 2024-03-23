@@ -1,9 +1,23 @@
-import 'regenerator-runtime'; /* for async await transpile */
+import 'regenerator-runtime';
 import '../styles/main.css';
-import '../components/navbar-app.js'
-import '../components/hero-app.js'
-import '../components/stats-card'
-import '../components/footer-app'
-import main from './main.js'
+import '../components/organisms/navbar-app';
+import '../components/organisms/footer-app';
+import App from './app';
+import swRegister from './utils/sw-register';
 
-document.addEventListener('DOMContentLoaded', main);
+const app = new App({
+  content: document.querySelector('#mainContent'),
+  drawer: document.querySelector('#drawer'),
+  button: document.querySelector('#drawer-toggle'),
+});
+
+window.addEventListener('hashchange', () => {
+  app.renderPage();
+  console.log('test loaded');
+});
+
+window.addEventListener('load', async () => {
+  app.renderPage();
+  console.log('test loaded');
+  await swRegister();
+});
