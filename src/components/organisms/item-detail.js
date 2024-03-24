@@ -1,4 +1,5 @@
 import { apiEndpoint } from '../../scripts/const';
+import LikeButtonInitiator from '../../scripts/utils/fav-btn-initiator';
 
 class ItemDetail extends HTMLElement {
   constructor() {
@@ -8,6 +9,7 @@ class ItemDetail extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this.initLikeButton();
   }
 
   set datas(item) {
@@ -170,6 +172,9 @@ class ItemDetail extends HTMLElement {
         .fav-button:hover {
           opacity: 0.8;
         }
+        .w-full {
+          width: 100%;
+        }
         @media (min-width: 768px) {
           .section-review__card {
             max-width: 20rem;
@@ -229,10 +234,7 @@ class ItemDetail extends HTMLElement {
               ${categoryList}
             </ul>
           </div>
-          
-          <button class="fav-button">
-            Add to Favorite
-          </button>
+          <div id="fav-btn__container" class="w-full"></div>
         </div>
       </section>
       
@@ -256,6 +258,19 @@ class ItemDetail extends HTMLElement {
         <ul class="section-review__list">${renderReview}</ul>
       </section>
     `;
+  }
+
+  initLikeButton() {
+    const likeButtonContainer = this.shadowDOM.getElementById('fav-btn__container');
+    if (likeButtonContainer) {
+      LikeButtonInitiator.init({
+        likeButtonContainer,
+        resto: {
+          id: this._datas?.id,
+          ...this._datas,
+        },
+      });
+    }
   }
 }
 
