@@ -13,11 +13,9 @@ const app = new App({
 
 window.addEventListener('hashchange', () => {
   app.renderPage();
-  console.log('test loaded');
 });
 
-window.addEventListener('load', async () => {
+window.addEventListener('load', () => {
   app.renderPage();
-  console.log('test loaded');
-  await swRegister();
+  swRegister();
 });

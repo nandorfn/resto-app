@@ -1,9 +1,7 @@
-import { Workbox } from 'workbox-window';
-
 const swRegister = async () => {
   if (!('serviceWorker' in navigator)) {
-    const wb = new Workbox('./service-worker.js');
-    wb.register();
+    console.log('Service Worker not supported in the browser');
+    return;
   }
 
   try {

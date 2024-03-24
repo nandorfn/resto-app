@@ -31,18 +31,10 @@ const Home = {
         }
       } catch (error) {
         console.error('Error rendering restaurants:', error.message);
-        // Handle error, e.g., display error message to user
       }
     };
 
-    // Show loader while fetching data
-    const loaderElement = document.createElement('div');
-    loaderElement.classList.add('loader');
-    document.getElementById('restaurant-list__container').appendChild(loaderElement);
-
-    renderRestaurants().finally(() => {
-      loaderElement.remove(); // Remove loader once rendering is done
-    });
+    renderRestaurants();
   },
 };
 

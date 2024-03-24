@@ -12,4 +12,5 @@ export const CONFIG = {
   DB_NAME: 'restaurant-db',
   DB_VERSION: 1,
   ONJECT_STORE_NAME: 'restaurant',
+  CACHE_NAME: new Date().toISOString(),
 };
