@@ -13,6 +13,10 @@ const Home = {
     <stats-card></stats-card>
     <section id="restaurant-list">
       <h2 class="restaurant-list__title">Nearby Restaurants</h2>
+      <form id="searchForm">
+        <input type="text" id="searchInput" placeholder="Find your favorite restaurants"/>
+        <button type="submit">Search</button>
+      </form>
       <div id="restaurant-list__container"></div>
     </section>
     `;
@@ -20,13 +24,24 @@ const Home = {
 
   async afterRender() {
     const listContainer = document.getElementById('restaurant-list__container');
+    const searchInput = document.getElementById('searchInput');
+    const searchForm = document.getElementById('searchForm');
+
     listContainer.innerHTML = `
       <div class="loader"></div>
     `;
+
     const renderRestaurants = async () => {
       try {
+        let data = [];
         const restaurantListElement = document.createElement('item-list');
-        const data = await fetchData({ url: apiEndpoint.getAll });
+        if (searchInput.value.trim() !== '') {
+          data = await fetchData({
+            url: `${apiEndpoint.search}${searchInput.value}`,
+          });
+        } else {
+          data = await fetchData({ url: apiEndpoint.getAll });
+        }
 
         if (data && data.restaurants) {
           restaurantListElement.datas = data.restaurants;
@@ -41,6 +56,11 @@ const Home = {
     };
 
     renderRestaurants();
+
+    searchForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      renderRestaurants();
+    });
   },
 };
 

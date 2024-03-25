@@ -29,6 +29,15 @@ img {
 .w-40 {
   width: 40rem;
 }
+.h-fluid {
+  height: 90%;
+  max-height: 30rem;
+}
+.w-fluid {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 30rem;
+}
 .w-full {
   width: 100%;
 }
@@ -66,6 +75,48 @@ img {
 .skip-link:focus {
   top: 50px;
 }
+
+#searchForm {
+  display: flex;
+  width: 90%;
+  max-width: 30rem;
+  gap: 1rem;
+  margin: 0 auto;
+  item-align: center;
+  margin-bottom: 20px;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#searchInput:focus {
+  outline: none;
+  border-color: dodgerblue;
+}
+
+#searchForm button {
+  padding: 8px 16px;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #FFE500;
+}
+
+#searchForm button:hover {
+  opacity: 0.8;
+}
+
+#searchForm button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ccc;
+}
+
 
 .loader {
   width: 50px;

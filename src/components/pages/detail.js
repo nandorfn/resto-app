@@ -1,6 +1,7 @@
 import fetchData from '../../api/api';
 import { apiEndpoint } from '../../scripts/const';
 import UrlParser from '../../scripts/routes/url-parser';
+import { error404 } from '../molecules/empty-page';
 import '../organisms/item-detail';
 import '../organisms/detail-skeleton';
 
@@ -24,15 +25,7 @@ const Detail = {
       detailElement.innerHTML = '';
       detailElement.appendChild(restaurantDetailElement);
     } catch (error) {
-      detailElement.innerHTML = `
-        <div>
-        <img 
-          src='./images/vector/404.jpg'
-          width="100"
-          alt="404"
-        />
-      </div>
-      `;
+      detailElement.innerHTML = error404();
     }
   },
 };

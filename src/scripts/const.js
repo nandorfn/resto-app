@@ -3,7 +3,7 @@ export const apiurl = 'https://restaurant-api.dicoding.dev';
 export const apiEndpoint = {
   getAll: '/list',
   getDetail: '/detail',
-  search: '/search?=',
+  search: '/search?q=',
   review: '/review',
   imgLg: `${apiurl}/images/large`,
 };
