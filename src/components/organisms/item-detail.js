@@ -1,5 +1,11 @@
-import { apiEndpoint } from '../../scripts/const';
+/* eslint-disable import/no-extraneous-dependencies */
+import moment from 'moment';
+import 'moment/locale/id';
+import Swal from 'sweetalert2';
+import fetchData from '../../api/api';
+import { apiEndpoint, apiurl } from '../../scripts/const';
 import LikeButtonInitiator from '../../scripts/utils/fav-btn-initiator';
+import './navbar-app';
 
 class ItemDetail extends HTMLElement {
   constructor() {
@@ -49,7 +55,7 @@ class ItemDetail extends HTMLElement {
           gap: 2rem;
           max-width: 70rem;
           margin: 0 auto;
-          margin-top: 8rem;
+          padding-top: 8rem;
         }
         
         .section-hero__picture {
@@ -175,6 +181,45 @@ class ItemDetail extends HTMLElement {
         .w-full {
           width: 100%;
         }
+        .comment-form {
+          margin: 2rem auto 0 auto;
+          width: 90%;
+          max-width: 30rem;
+          text-align: center;
+          padding: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          background-color: #f9f9f9;
+        }
+
+        .comment-form input[type="text"],
+        .comment-form textarea{
+          width: 100%;
+          padding: 0.5rem;
+          margin-bottom: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+        .comment-form button[type="submit"] {
+          background-color: #D80032;
+          border: none;
+          border-radius: 8px;
+          color: #ffffff;
+          padding: 0.5rem 1rem;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .comment-form button[type="submit"]:hover {
+          background-color: #b50026;
+        }
+        .comment-form button[type="submit"]:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
         @media (min-width: 768px) {
           .section-review__card {
             max-width: 20rem;
@@ -255,9 +300,81 @@ class ItemDetail extends HTMLElement {
       
       <section class="section-review">
         <h3>Customer Reviews</h3>
+        <form id="commentSection" class="comment-form">
+          <input  type="text" id="commentName" placeholder="Enter your name...">
+          <textarea id="commentReview" placeholder="Enter your comment..."></textarea>
+          <button type="submit">Submit</button>
+        </form>
         <ul class="section-review__list">${renderReview}</ul>
       </section>
     `;
+    const commentSection = this.shadowDOM.getElementById('commentSection');
+    const commentName = this.shadowDOM.getElementById('commentName');
+    const commentReview = this.shadowDOM.getElementById('commentReview');
+
+    commentSection.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const name = commentName.value.trim();
+      const review = commentReview.value.trim();
+      if (name && review) {
+        await fetchData({
+          url: `${apiurl}${apiEndpoint.review}`,
+          method: 'POST',
+          data: {
+            id: this._datas?.id,
+            name,
+            review,
+          },
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => {
+            if (response?.message === 'success') {
+              const newReview = {
+                name,
+                date: moment(new Date()).locale('id').format('DD MMMM YYYY'),
+                review,
+              };
+              this._datas.customerReviews.push(newReview);
+              commentReview.value = '';
+              commentName.value = '';
+              this.render();
+              Swal.fire({
+                text: 'Success post review',
+                position: 'top-right',
+                showConfirmButton: false,
+                toast: true,
+                timer: 2000,
+              });
+            }
+          })
+          .catch(() => {
+            Swal.fire({
+              text: 'Failed to post review',
+              position: 'top-right',
+              showConfirmButton: false,
+              toast: true,
+              timer: 2000,
+            });
+          });
+      }
+    });
+
+    const toggleSubmitButton = () => {
+      const name = commentName.value.trim();
+      const review = commentReview.value.trim();
+      const submitButton = commentSection.querySelector('button[type="submit"]');
+      if (!name || !review) {
+        submitButton.disabled = true;
+      } else {
+        submitButton.disabled = false;
+      }
+    };
+
+    toggleSubmitButton();
+    commentName.addEventListener('input', toggleSubmitButton);
+    commentReview.addEventListener('input', toggleSubmitButton);
   }
 
   initLikeButton() {

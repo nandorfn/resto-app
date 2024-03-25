@@ -4,6 +4,7 @@ import '../organisms/hero-app';
 import '../organisms/stats-card';
 import '../organisms/item-list';
 import '../organisms/item-card';
+import { error404 } from '../molecules/empty-page';
 
 const Home = {
   async render() {
@@ -18,6 +19,10 @@ const Home = {
   },
 
   async afterRender() {
+    const listContainer = document.getElementById('restaurant-list__container');
+    listContainer.innerHTML = `
+      <div class="loader"></div>
+    `;
     const renderRestaurants = async () => {
       try {
         const restaurantListElement = document.createElement('item-list');
@@ -25,12 +30,13 @@ const Home = {
 
         if (data && data.restaurants) {
           restaurantListElement.datas = data.restaurants;
-          document.getElementById('restaurant-list__container').appendChild(restaurantListElement);
+          listContainer.innerHTML = '';
+          listContainer.appendChild(restaurantListElement);
         } else {
           throw new Error('Failed to fetch restaurant data');
         }
       } catch (error) {
-        console.error('Error rendering restaurants:', error.message);
+        listContainer.innerHTML = error404();
       }
     };
 

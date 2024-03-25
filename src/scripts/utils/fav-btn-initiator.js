@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import Swal from 'sweetalert2';
 import { LikeButton, LikedButton } from '../../components/molecules/fav-btn';
 import RestaurantDB from '../data/database';
 
@@ -5,7 +7,6 @@ const LikeButtonInitiator = {
   async init({ likeButtonContainer, resto }) {
     this._likeButtonContainer = likeButtonContainer;
     this._resto = resto;
-    console.log(this._likeButtonContainer);
     await this._renderButton();
   },
 
@@ -26,8 +27,6 @@ const LikeButtonInitiator = {
 
   _renderLike() {
     this._likeButtonContainer.innerHTML = LikeButton();
-    console.log(this._likeButtonContainer);
-
     try {
       const likeButton = this._likeButtonContainer.querySelector('#likeBtn');
       likeButton?.addEventListener('click', async () => {
@@ -35,7 +34,14 @@ const LikeButtonInitiator = {
         this._renderButton();
       });
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        text: 'Failed added to favorites list',
+        position: 'top-right',
+        showConfirmButton: false,
+        toast: true,
+        icon: 'error',
+        timer: 2000,
+      });
     }
   },
 
@@ -48,7 +54,13 @@ const LikeButtonInitiator = {
         this._renderButton();
       });
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        text: 'Failed to delete from favorites list',
+        position: 'top-right',
+        showConfirmButton: false,
+        toast: true,
+        timer: 2000,
+      });
     }
   },
 };

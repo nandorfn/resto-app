@@ -24,8 +24,15 @@ const Detail = {
       detailElement.innerHTML = '';
       detailElement.appendChild(restaurantDetailElement);
     } catch (error) {
-      console.log(error);
-      detailElement.innerHTML = `Error fetching data. Please try again later. Error message: ${error.message}`;
+      detailElement.innerHTML = `
+        <div>
+        <img 
+          src='./images/vector/404.jpg'
+          width="100"
+          alt="404"
+        />
+      </div>
+      `;
     }
   },
 };

@@ -25,7 +25,7 @@ const fetchData = async ({
 
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch data');
+    return error;
   }
 };
 
