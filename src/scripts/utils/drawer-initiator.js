@@ -9,9 +9,10 @@ const DrawerInitiator = {
     });
   },
 
-  _toggleDrawer(event, drawer) {
-    event?.stopPropagation();
-    drawer?.classList?.toggle('show');
+  toggleDrawer(event, drawer) {
+    event.preventDefault();
+    event.stopPropagation();
+    drawer.classList.toggle('show');
   },
 
   _closeDrawer(event, drawer) {

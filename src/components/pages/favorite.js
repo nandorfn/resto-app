@@ -4,7 +4,7 @@ import { emptyPage } from '../molecules/empty-page';
 const Favorite = {
   async render() {
     return `
-    <section id="restaurant-list" class="min-h-70 pt-5">
+    <section id="focusContent" tabindex="0" class="min-h-70 pt-5 restaurant-list">
       <h2 class="restaurant-list__title">Your Favorite Restaurants</h2>
       <div id="restaurant-list__container"></div>
     </section>

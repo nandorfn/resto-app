@@ -44,7 +44,7 @@ img {
 .text-center {
   text-align: center;
 }
-#restaurant-list {
+.restaurant-list {
   display: flex;
   flex-direction: column;
 }

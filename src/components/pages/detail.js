@@ -8,12 +8,12 @@ import '../organisms/detail-skeleton';
 const Detail = {
   async render() {
     return `
-      <div id="detail-element"></div>
+      <div id="focusContent" tabindex="0" class="detail-element"></div>
     `;
   },
 
   async afterRender() {
-    const detailElement = document.querySelector('#detail-element');
+    const detailElement = document.querySelector('.detail-element');
     const skeletonElement = document.createElement('detail-skeleton');
     detailElement.appendChild(skeletonElement);
 

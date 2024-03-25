@@ -11,7 +11,7 @@ const Home = {
     return `
     <hero-app></hero-app>
     <stats-card></stats-card>
-    <section id="restaurant-list">
+    <section id="focusContent" tabindex="0" class="restaurant-list">
       <h2 class="restaurant-list__title">Nearby Restaurants</h2>
       <form id="searchForm">
         <input type="text" id="searchInput" placeholder="Find your favorite restaurants"/>
