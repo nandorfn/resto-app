@@ -1,11 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import moment from 'moment';
-import 'moment/locale/id';
 import Swal from 'sweetalert2';
 import fetchData from '../../api/api';
 import { apiEndpoint, apiurl } from '../../scripts/const';
 import LikeButtonInitiator from '../../scripts/utils/fav-btn-initiator';
 import './navbar-app';
+import formatDate from '../../scripts/utils/func';
 
 class ItemDetail extends HTMLElement {
   constructor() {
@@ -35,10 +34,10 @@ class ItemDetail extends HTMLElement {
     const renderReview = this?._datas.customerReviews?.map((item) => `
       <li class="section-review__card">
         <div>
-          <p>${item?.name}</p>
+          <p id="username">${item?.name}</p>
           <span>${item?.date}</span>
         </div>
-        <span>${item?.review}</span>
+        <span id="userReview">${item?.review}</span>
       </li>
     `).join('');
     this.shadowDOM.innerHTML = `
@@ -253,11 +252,15 @@ class ItemDetail extends HTMLElement {
       </style>
       
       <section class="section-hero">
-        <img 
-          class="section-hero__picture"
-          src="${apiEndpoint.imgLg}/${this?._datas?.pictureId}" 
-          lazy="loading"
-        />
+      <picture>
+          <source media="(max-width: 600px)" srcset="${apiEndpoint.imgSm}/${this._datas.pictureId}">
+          <source media="(min-width: 600px) and (max-width: 1200px)" srcset="${apiEndpoint.imgMd}/${this._datas.pictureId}">
+          <img 
+            class="section-hero__picture"
+            src="${apiEndpoint.imgLg}/${this?._datas?.pictureId}" 
+            lazy="loading"
+          />
+      </picture>
         
         <div class="section-hero__detail">
           <h3>${this?._datas?.name}</h3>
@@ -303,7 +306,7 @@ class ItemDetail extends HTMLElement {
         <form id="commentSection" class="comment-form">
           <input  type="text" id="commentName" placeholder="Enter your name...">
           <textarea id="commentReview" placeholder="Enter your comment..."></textarea>
-          <button type="submit">Submit</button>
+          <button id="submitBtn" type="submit">Submit</button>
         </form>
         <ul class="section-review__list">${renderReview}</ul>
       </section>
@@ -331,9 +334,10 @@ class ItemDetail extends HTMLElement {
         })
           .then((response) => {
             if (response?.message === 'success') {
+
               const newReview = {
                 name,
-                date: moment(new Date()).locale('id').format('DD MMMM YYYY'),
+                date: formatDate(new Date()),
                 review,
               };
               this._datas.customerReviews.push(newReview);

@@ -18,8 +18,9 @@ class ItemList extends HTMLElement {
       <style>
         .placeholder {
           margin: auto;
+          margin-top: 4rem;
           font-weight: normal;
-          color: #fff;
+          color: #000;
           -webkit-user-select: none;
           -moz-user-select: none;
           -ms-user-select: none;

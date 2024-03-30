@@ -6,11 +6,13 @@ export const apiEndpoint = {
   search: '/search?q=',
   review: '/review',
   imgLg: `${apiurl}/images/large`,
+  imgMd: `${apiurl}/images/medium`,
+  imgSm: `${apiurl}/images/small`,
 };
 
 export const CONFIG = {
   DB_NAME: 'restaurant-db',
   DB_VERSION: 1,
-  ONJECT_STORE_NAME: 'restaurant',
+  OBJECT_STORE_NAME: 'restaurant',
   CACHE_NAME: new Date().toISOString(),
 };

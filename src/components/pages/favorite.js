@@ -21,11 +21,6 @@ const Favorite = {
           restaurantListElement.datas = data;
           restaurantList.appendChild(restaurantListElement);
         } else {
-          restaurantList.innerHTML = `
-            <div>
-              <h4>Your favorites is empty</h4>
-            </div>
-          `;
           throw new Error('Failed to get restaurant data');
         }
       } catch (error) {

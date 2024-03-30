@@ -61,8 +61,11 @@ class Hero extends HTMLElement {
         }
         
       </style>
-      
-      <img class="hero-image" src="./images/heros/hero-image_4.jpg" width="100" alt="restaurant thumbnail" />
+      <picture>
+        <source media="(max-width: 600px)" srcset="./images/hero-image_4-small.jpg">
+        <img class="hero-image" src="./images/hero-image_4-large.jpg" width="100" alt="restaurant thumbnail" />
+      </picture>
+
       <div class="text-container">
         <h1 class="hero-heading">Discover the Best Restaurants in Town</h1>
         <p class="hero-p">Explore a variety of cuisines and dining experiences. Find your new favorite restaurant today.</p>

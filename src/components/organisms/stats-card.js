@@ -60,7 +60,7 @@ class StatsCard extends HTMLElement {
       }
       
       .stats-text__desc {
-        color: #928D8E;
+        color: #7a7576;
       }
       
       @media (min-width: 992px) {

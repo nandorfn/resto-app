@@ -88,7 +88,7 @@ class ItemCard extends HTMLElement {
           font-weight: 600;
         }
         
-        .card-item__title, h4 {
+        .card-item__title, h3 {
           font-size: 1.2rem;
           font-weight: 700;
         }
@@ -108,10 +108,16 @@ class ItemCard extends HTMLElement {
         id="card-item__${this._datas.id}" 
         class="card-item">
         <div class="picture-container" >
+        <picture>
+          <source media="(max-width: 600px)" srcset="${apiEndpoint.imgSm}/${this._datas.pictureId}">
+          <source media="(min-width: 600px) and (max-width: 1200px)" srcset="${apiEndpoint.imgMd}/${this._datas.pictureId}">
           <img 
-            class="card-item__picture"
-            src="${apiEndpoint.imgLg}/${this._datas.pictureId}" 
-            lazy="loading"/>
+          loading="lazy"
+          alt="${this._datas.name}"
+          class="lazyload card-item__picture"
+          src="${apiEndpoint.imgLg}/${this._datas.pictureId}" 
+          />
+        </picture>
         </div>
         <div class="text-container">
           <div class="card-item__circle">
@@ -119,7 +125,7 @@ class ItemCard extends HTMLElement {
           </div>
           
           <div class="text-container__wrapper">
-            <h4 class="text-semibold">${this._datas.name}</h4>
+            <h3 id="restoName" class="text-semibold">${this._datas.name}</h3>
             <p>${this._datas.city}</p>
           </div>
           

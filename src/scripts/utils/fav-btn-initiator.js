@@ -12,7 +12,6 @@ const LikeButtonInitiator = {
 
   async _renderButton() {
     const { id } = this._resto;
-
     if (await this._isRestoExist(id)) {
       this._renderLiked();
     } else {
@@ -27,41 +26,42 @@ const LikeButtonInitiator = {
 
   _renderLike() {
     this._likeButtonContainer.innerHTML = LikeButton();
-    try {
-      const likeButton = this._likeButtonContainer.querySelector('#likeBtn');
-      likeButton?.addEventListener('click', async () => {
+    const likeButton = this._likeButtonContainer.querySelector('#likeBtn');
+    likeButton.addEventListener('click', async () => {
+      try {
         await RestaurantDB.putResto(this._resto);
         this._renderButton();
-      });
-    } catch (error) {
-      Swal.fire({
-        text: 'Failed added to favorites list',
-        position: 'top-right',
-        showConfirmButton: false,
-        toast: true,
-        icon: 'error',
-        timer: 2000,
-      });
-    }
+      } catch (error) {
+        Swal.fire({
+          text: 'Failed added to favorites list',
+          position: 'top-right',
+          showConfirmButton: false,
+          toast: true,
+          icon: 'error',
+          timer: 2000,
+        });
+      }
+    });
   },
 
   _renderLiked() {
     this._likeButtonContainer.innerHTML = LikedButton();
-    try {
-      const likeButton = this._likeButtonContainer.querySelector('#likedBtn');
-      likeButton?.addEventListener('click', async () => {
+    const likeButton = this._likeButtonContainer.querySelector('#likedBtn');
+    likeButton?.addEventListener('click', async () => {
+      try {
         await RestaurantDB.deleteResto(this._resto.id);
         this._renderButton();
-      });
-    } catch (error) {
-      Swal.fire({
-        text: 'Failed to delete from favorites list',
-        position: 'top-right',
-        showConfirmButton: false,
-        toast: true,
-        timer: 2000,
-      });
-    }
+      } catch (error) {
+        Swal.fire({
+          text: 'Failed to delete from favorites list',
+          position: 'top-right',
+          showConfirmButton: false,
+          toast: true,
+          timer: 2000,
+          icon: 'error',
+        });
+      }
+    });
   },
 };
 
