@@ -35,7 +35,7 @@ class StatsCard extends HTMLElement {
     
       .stats-list__wrapper {
         display: grid;
-        gap: 4rem;
+        gap: 2rem;
         grid-template-columns: 1fr 1fr 1fr;
         list-style: none;
         box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
@@ -63,7 +63,7 @@ class StatsCard extends HTMLElement {
         color: #7a7576;
       }
       
-      @media (min-width: 992px) {
+      @media (min-width: 1280px) {
         .stats-container {
           display: flex;
         }
