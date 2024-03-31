@@ -78,8 +78,9 @@ img {
 
 #searchForm {
   display: flex;
-  width: 90%;
+  width: 75%;
   max-width: 30rem;
+  min-height: 45px;
   gap: 1rem;
   margin: 0 auto;
   item-align: center;
