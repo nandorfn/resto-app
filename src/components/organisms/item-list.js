@@ -58,7 +58,7 @@ class ItemList extends HTMLElement {
               grid-template-columns: 1fr 1fr;
             }
           }
-          @media (min-width: 992px) {
+          @media (min-width: 1280px) {
             :host {
               grid-template-columns: 1fr 1fr 1fr;
             }
