@@ -183,6 +183,7 @@ class ItemDetail extends HTMLElement {
         .comment-form {
           margin: 2rem auto 0 auto;
           width: 90%;
+          min-height: 45px;
           max-width: 30rem;
           text-align: center;
           padding: 1rem;
@@ -194,10 +195,12 @@ class ItemDetail extends HTMLElement {
         .comment-form input[type="text"],
         .comment-form textarea{
           width: 100%;
+          display: inline-block;
           padding: 0.5rem;
           margin-bottom: 1rem;
           border: 1px solid #ccc;
           border-radius: 4px;
+          min-height: 45px;
           box-sizing: border-box;
         }
 
@@ -206,7 +209,8 @@ class ItemDetail extends HTMLElement {
           border: none;
           border-radius: 8px;
           color: #ffffff;
-          padding: 0.5rem 1rem;
+          padding: 0.8rem 1.5rem;
+          min-height: 45px;
           font-size: 16px;
           cursor: pointer;
           transition: background-color 0.3s ease;
@@ -334,7 +338,6 @@ class ItemDetail extends HTMLElement {
         })
           .then((response) => {
             if (response?.message === 'success') {
-
               const newReview = {
                 name,
                 date: formatDate(new Date()),

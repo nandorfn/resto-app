@@ -1,3 +1,10 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import {
+  beforeEach,
+  describe,
+  expect,
+  it,
+} from '@jest/globals';
 import RestaurantDB from '../src/scripts/data/database';
 import LikeButtonInitiator from '../src/scripts/utils/fav-btn-initiator';
 
