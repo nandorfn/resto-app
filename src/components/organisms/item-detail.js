@@ -334,7 +334,6 @@ class ItemDetail extends HTMLElement {
         })
           .then((response) => {
             if (response?.message === 'success') {
-
               const newReview = {
                 name,
                 date: formatDate(new Date()),
